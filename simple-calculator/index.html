@@ -1,0 +1,240 @@
+	<!DOCTYPE html>
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title>simple calculator</title>
+		<style type="text/css">
+			table{
+				    margin-left: 500px;
+	      		    margin-top: 100px;
+				    			background-color:  darkred;
+
+				    			    border: 2px solid;
+	    padding-block: 9px;
+	    padding-left: 6px;
+	    padding-right: 6px;
+	    border-radius: 14px;
+	    box-shadow: 68px a;
+	    box-shadow: 6px 8px black;
+			}
+			.button{
+				padding: 10px 20px;
+	    background-color: antiquewhite;			
+
+			
+			}
+			.largebutton{
+			
+				padding: 10px 18px;
+	    background-color: antiquewhite;
+			}
+			#display{
+				width: 209px;
+			    height: 37px;
+			    font-size:x-large;
+			    background-color: aqua;
+			    text-align: right;
+			}
+			#off{
+				    padding: 10px 15px;
+					background-color: mintcream;
+			}
+			
+		</style>
+
+		<script type="text/javascript">
+
+			var x='';
+			var result='';
+			var power=false;
+			
+			function numbers(val){
+				if(power){
+					  x=document.getElementById('display');
+					  // console.log("before checking zero and null"+x.value);
+					if(x.value===''|| x.value==='0'){
+					     showzero(false);
+					     x.value='';
+				}
+				  
+				 // console.log(x.value.includes("Error!"||"Not"));
+				if(x.value.includes("Error!")||x.value.includes("Infinity")){
+					x.value='';
+					showzero(true);
+
+
+
+				}
+				// if(!x.value.equals(''))
+				// 		showzero(false);
+				x.value+=val;
+				// console.log("concatinating"+x.value);
+				// console.log(x.value);
+				
+			}
+		}
+			function equals(){
+				if(power){
+				try{
+				var eqn=x.value;
+				var err="";
+			    result=eval(eqn);
+					// if(result.includes("Infinity"){
+					// 	err="Infinity";
+					// }
+					// console.log(typeof result);
+					var res=result.toString();
+					if(res==="NaN") throw "Answer is not a number";
+					// console.log(result.toFixed(10));
+					// 
+					result=result.toString().substr(0,14);
+					// console.log(typeof result);
+					x.value=result;
+				}
+				catch(err){
+					console.log(err);
+					x.value="Error!";
+				}
+
+			}
+		}
+			function backbutton(){
+				if(power){
+				
+				if(x.value.includes("Infinity")||x.value.includes("Error!")||x.value==result){
+					showzero(true);
+				}
+
+			else{
+				if(!(x.value==='')||!(x.value==='0')){
+						x.value=x.value.slice(0,-1);
+
+						if((x.value.length<=0)){
+							showzero(true);
+						}
+					}
+				// else{
+				// 	showzero(true);
+				// }
+			}
+
+			}
+		}
+
+			function clearAll(){
+				if(power){
+				showzero(true);
+			}
+		}
+
+		function powerbutton(){
+			if(power){
+				power=false;
+				showzero(false);
+			}
+			else{
+				power=true;
+				showzero(true);
+			}
+		}
+
+		function showzero(flag){
+			
+			var zer=document.getElementById('display');
+			if(flag){
+				zer.value='0';
+			}
+			else if(!flag){
+				zer.value='';
+			}
+		}
+
+		</script>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<th colspan="4" style="color:antiquewhite;">Calculator</th>
+			</tr>
+			<tr>
+				<td  colspan="4"><input type="text" name="display" id="display" disabled /></td>
+			</tr>
+
+			<tr>
+				<td>
+					<input style="padding: 10px 17px;background-color: antiquewhite;"type="button"  value="ce" id="clearall" onclick="clearAll()" />
+				</td>
+				<td>
+					<input style="padding: 9px 15px; background-color: antiquewhite;"type="button"  value="&#9003;" id="back" onclick="backbutton()" />
+				</td>
+				<td>
+					<input type="button"style="padding: 10px 17px;background-color: antiquewhite;" value="%" id="percentage" onclick="numbers('%')" />
+				</td>
+				<td>
+					<input type="button"  class="largebutton" value="&#247" id="div" onclick="numbers('/')" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="button"class="button" value="7" id="seven" onclick="numbers('7')" />
+				</td>
+				<td>
+					<input type="button" class="button" value="8" id="eight" onclick="numbers('8')" />
+				</td>
+				<td>
+					<input type="button" class="button" value="9" id="nine" onclick="numbers('9')" />
+				</td>
+				<td>
+					<input type="button" style="padding: 10px 18px ;background-color: antiquewhite;" value="x" id="mul" onclick="numbers('*')" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="button" class="button" value="4" id="four" onclick="numbers('4')" />
+				</td>
+				<td>
+					<input type="button" class="button" value="5" id="five" onclick="numbers('5')" />
+				</td>
+				<td>
+					<input type="button" class="button" value="6" id="six" onclick="numbers('6')" />
+				</td>
+				<td>
+					<input type="button" class="button" value="-" id="minus" onclick="numbers('-')" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="button" class="button"  value="1" id="one" onclick="numbers('1')" />
+				</td>
+				<td>
+					<input type="button" class="button" value="2" id="two" onclick="numbers('2')" />
+				</td>
+				<td>
+					<input type="button" class="button"  value="3" id="three" onclick="numbers('3')" />
+				</td>
+				<th>
+					<input type="button" style="padding: 9px 18px;background-color: antiquewhite;" value="+" id="plus" onclick="numbers('+')" />
+				</th>
+				
+			</tr>
+
+			<tr>
+				<td>
+					<input type="button"  value ="A/c"id="off" onclick="powerbutton()" />
+				</td>
+				<td>
+					<input type="button" class="button" value="0" id="zero" onclick="numbers('0')" />
+				</td>
+				<td>
+					<input type="button" style="font-size: larger;padding: 6px 21px;background-color: antiquewhite;"  value="." id="point" onclick="numbers('.')" />
+				</td>
+				<th>
+					<input type="button" style="padding: 9px 18px; background-color: antiquewhite;"value="=" id="equals" onclick="equals()" />
+				</th>
+				
+			</tr>
+		
+
+
+	</body>
+	</html>
